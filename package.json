@@ -4,7 +4,7 @@
   "description": "Pipe filenames in, get contents out.",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "nodeunit test/test-*.js"
   },
   "repository": {
     "type": "git",
@@ -18,8 +18,11 @@
     "cat"
   ],
   "author": "Florent Jaby",
-  "license": "BSD",
+  "license": "MIT",
   "dependencies": {
     "split": "~0.2.1"
+  },
+  "devDependencies": {
+    "nodeunit":"0.7.x"
   }
 }
