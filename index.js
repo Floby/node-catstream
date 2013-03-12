@@ -3,7 +3,8 @@ var fs = require('fs');
 var stream = require('stream');
 var split = require('split');
 
-function FileStream (encoding, transformer, options) {
+function CatStream (encoding, transformer, options) {
+    if(!(this instanceof CatStream)) return new CatStream(encoding, transformer, options);
     var args = [].slice.call(arguments);
     var arg;
     while(arg = args.shift()) {
@@ -41,48 +42,61 @@ function FileStream (encoding, transformer, options) {
     this._split = split(this._separator);
     this._split.on('data', this._onFilename.bind(this));
 }
-util.inherits(FileStream, stream.Transform);
+util.inherits(CatStream, stream.Transform);
 
-FileStream.prototype._transform = function _transform(chunk, encoding, callback) {
-    this._split.write(chunk, encoding, callback);
+CatStream.prototype._transform = function _transform(chunk, encoding, callback) {
+    this._split.write(chunk, encoding);
+    callback();
 };
 
-FileStream.prototype._flush = function _flush(callback) {
+CatStream.prototype._flush = function _flush(callback) {
+    var self = this;
     this._split.end();
-    if(this._queue.length === 0) {
-        return callback();
+    if(this._queue.length) {
+        this._queue[this._queue.length-1].on('end', function(err, res) {
+            self.push(null);
+            callback();
+        });
+        this._startHead()
     }
     else {
-        this._queue[this._queue.length -1].on('end', callback);
+        this.push(null)
     }
 };
 
-FileStream.prototype._onFilename = function _onFilename(filename) {
+
+CatStream.prototype._onFilename = function _onFilename(filename) {
     if(filename.trim() == '') return;
 
     var self = this;
     var stream = fs.createReadStream(filename);
-    
     if(this._transformer) {
         stream = stream.pipe(this._transformer(filename));
     }
 
-    self._queue.push(stream);
-
-    stream.on('readable', function() {
-        if(stream === self._queue[0]) {
-            self.push(stream.read());
-        }
+    stream.pause();
+    stream.on('data', function(data) {
+        self.push(data);
     });
     stream.on('end', function() {
-        if(stream === self._queue[0]) {
-            self.push(stream.read());
-            self._queue.shift();
-            if(self._queue[0]) {
-                self._queue[0].resume();
-            }
-        }
+        self._disposeHead();
     });
+    self._queue.push(stream);
+    this._startHead();
 };
 
-module.exports = FileStream;
+CatStream.prototype._disposeHead = function _disposeHead() {
+    this._queue.shift();
+    this._startHead();
+};
+
+CatStream.prototype._startHead = function _startHead() {
+    if(this._queue.length) {
+        this._queue[0].resume();
+    }
+    else if(this._writableState.ended) {
+        this.push(null);
+    }
+};
+
+module.exports = CatStream;
