@@ -25,6 +25,19 @@ exports.testTextFiles = function(test) {
     c.end(files.join('\n'));
 }
 
+exports.testTextFilesSeparator = function(test) {
+    var c = cat({
+        separator: ':'
+    });
+    var s = sink();
+    // using split to ignore new lines
+    c.pipe(split()).pipe(s).on('data', function(data) {
+        test.equal('abc', data, "Content should be abc");
+        test.done();
+    });
+    c.end(files.join(':'));
+}
+
 exports.testDelayedWrites = function(test) {
     var c = cat();
     var s = sink();
