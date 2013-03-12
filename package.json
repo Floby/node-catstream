@@ -17,9 +17,9 @@
     "multifile",
     "cat"
   ],
-  "devDependencies": {
-    "tmp":"0.0.x"
-  },
   "author": "Florent Jaby",
-  "license": "BSD"
+  "license": "BSD",
+  "dependencies": {
+    "split": "~0.2.1"
+  }
 }
