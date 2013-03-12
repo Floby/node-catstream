@@ -14,17 +14,19 @@ catstream is a Transform stream that takes filenames as inputs and outputs
 the contents of said filenames in the order they were read.
 
 ```javascript
-    var filenames = [
-        'a.txt', // content: hello
-        'b.txt', // content: goodbye
-        'c.txt'  // content: o rly
-    ];
-    var cat = require('catstream');
-    var c = cat()
-    cat.pipe(process.stdout)
-    cat.end(filenames.join('\n'))
 
-    // prints "hello goodbye o rly" to the console
+var filenames = [
+    'a.txt', // content: hello
+    'b.txt', // content: goodbye
+    'c.txt'  // content: o rly
+];
+var cat = require('catstream');
+var c = cat()
+cat.pipe(process.stdout)
+cat.end(filenames.join('\n'))
+
+// prints "hello goodbye o rly" to the console
+
 ```
 
 more usually you have a readable stream with a list of filenames that you pipe to this.
