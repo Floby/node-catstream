@@ -1,0 +1,25 @@
+{
+  "name": "catstream",
+  "version": "0.0.1",
+  "description": "Pipe filenames in, get contents out.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Floby/node-catstream.git"
+  },
+  "keywords": [
+    "stream",
+    "stream2",
+    "concatenate",
+    "multifile",
+    "cat"
+  ],
+  "devDependencies": {
+    "tmp":"0.0.x"
+  },
+  "author": "Florent Jaby",
+  "license": "BSD"
+}
