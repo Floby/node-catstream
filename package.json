@@ -1,6 +1,6 @@
 {
   "name": "catstream",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "Pipe filenames in, get contents out.",
   "main": "index.js",
   "scripts": {
