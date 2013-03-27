@@ -23,7 +23,8 @@
   "author": "Florent Jaby",
   "license": "MIT",
   "dependencies": {
-    "split": "~0.2.1"
+    "split": "~0.2.1",
+    "stream-stream":"1.0"
   },
   "devDependencies": {
     "nodeunit": "0.7.x"
