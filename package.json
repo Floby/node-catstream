@@ -1,6 +1,6 @@
 {
   "name": "catstream",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Pipe filenames in, get contents out.",
   "main": "index.js",
   "scripts": {
@@ -24,7 +24,7 @@
   "license": "MIT",
   "dependencies": {
     "split": "~0.2.1",
-    "stream-stream":"1.0"
+    "stream-stream": "1.0"
   },
   "devDependencies": {
     "nodeunit": "0.7.x"
