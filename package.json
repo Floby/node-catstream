@@ -27,6 +27,7 @@
     "stream-stream": "1.0"
   },
   "devDependencies": {
-    "nodeunit": "0.7.x"
+    "nodeunit": "0.7.x",
+    "stream-sink":"1.x.x"
   }
 }

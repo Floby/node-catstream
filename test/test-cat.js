@@ -2,7 +2,7 @@ var stream = require('stream');
 var util = require('util');
 var path = require('path');
 var cat = require('../');
-var sink = require('./sink')
+var sink = require('stream-sink')
 var split = require('split');
 
 var files = [
