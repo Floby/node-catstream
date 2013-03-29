@@ -1,6 +1,6 @@
 {
   "name": "catstream",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Pipe filenames in, get contents out.",
   "main": "index.js",
   "scripts": {
@@ -28,6 +28,6 @@
   },
   "devDependencies": {
     "nodeunit": "0.7.x",
-    "stream-sink":"1.x.x"
+    "stream-sink": "1.x.x"
   }
 }
