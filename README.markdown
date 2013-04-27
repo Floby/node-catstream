@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Floby/node-libspotify.png)](https://travis-ci.org/Floby/node-catstream)
+[![Build Status](https://travis-ci.org/Floby/node-catstream.png)](https://travis-ci.org/Floby/node-catstream)
 
 # node-catstream
 
