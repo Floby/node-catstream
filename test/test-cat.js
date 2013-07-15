@@ -5,6 +5,7 @@ var cat = require('../');
 var sink = require('stream-sink')
 var split = require('split');
 
+
 var files = [
     'a.txt',
     'b.txt',
@@ -55,7 +56,7 @@ exports.testDelayedWrites = function(test) {
             c.end();
             clearInterval(to);
         }
-    }, 400);
+    }, 20);
 }
 
 exports.testTransformStream = function(test) {
@@ -78,3 +79,25 @@ exports.testTransformStream = function(test) {
     });
     c.end(files.join('\n'));
 }
+
+exports['chunked file names'] = function (test) {
+    var c = cat();
+    var s = sink();
+    c.pipe(split()).pipe(s).on('data', function(data) {
+        test.equal('abc', data, "Content should be abc");
+        test.done();
+    });
+    var filesToWrite = files.slice().join('\n');
+    var step = 10;
+    var to = setInterval(function() {
+        var f = filesToWrite.substr(0,step);
+        filesToWrite = filesToWrite.substr(step);
+        if(f) {
+            c.write(f);
+        }
+        else {
+            c.end();
+            clearInterval(to);
+        }
+    }, 5);
+};
