@@ -22,8 +22,8 @@ var filenames = [
 ];
 var cat = require('catstream');
 var c = cat()
-cat.pipe(process.stdout)
-cat.end(filenames.join('\n'))
+c.pipe(process.stdout)
+c.end(filenames.join('\n'))
 
 // prints "hello goodbye o rly" to the console
 
